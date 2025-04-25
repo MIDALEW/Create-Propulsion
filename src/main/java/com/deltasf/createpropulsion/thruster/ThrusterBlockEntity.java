@@ -75,7 +75,7 @@ public class ThrusterBlockEntity extends SmartBlockEntity implements IHaveGoggle
             add(FluidRegistry.ETHANOL.get().getSource());
             add(net.minecraft.world.level.material.Fluids.LAVA);
             add(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation("tfmg", "kerosene"))));
-            add(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation("tfmg", "rp1"))));
+            //add(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation("tfmg", "rp1"))));
 
             
         }
