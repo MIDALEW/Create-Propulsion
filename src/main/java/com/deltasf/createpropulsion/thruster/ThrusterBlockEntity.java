@@ -67,29 +67,35 @@ public class ThrusterBlockEntity extends SmartBlockEntity implements IHaveGoggle
     private static Set<Fluid> validFluids = new HashSet<Fluid>() {
         {
             //Not sure where to show these in game
-            if (CreatePropulsion.CDG_ACTIVE) {
-                add(FluidRegistry.PLANT_OIL.get().getSource());
-                add(FluidRegistry.BIODIESEL.get().getSource());
-                add(FluidRegistry.DIESEL.get().getSource());
-                add(FluidRegistry.GASOLINE.get().getSource());
-                add(FluidRegistry.ETHANOL.get().getSource());
-            } else {
-                add(net.minecraft.world.level.material.Fluids.LAVA);
-            }
+            
+            add(FluidRegistry.PLANT_OIL.get().getSource());
+            add(FluidRegistry.BIODIESEL.get().getSource());
+            add(FluidRegistry.DIESEL.get().getSource());
+            add(FluidRegistry.GASOLINE.get().getSource());
+            add(FluidRegistry.ETHANOL.get().getSource());
+            add(net.minecraft.world.level.material.Fluids.LAVA);
+            add(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation("tfmg", "kerosene"))));
+            add(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation("tfmg", "rp1"))));
+
+            
         }
     };
     //Yeah this is pretty ugly
     private static Dictionary<Fluid, FluidThrusterProperties> fluidsProperties = new Hashtable<Fluid, FluidThrusterProperties>();
     static {
-        if (CreatePropulsion.CDG_ACTIVE) {
             fluidsProperties.put(FluidRegistry.PLANT_OIL.get().getSource(), new FluidThrusterProperties(0.8f, 1.1f));
             fluidsProperties.put(FluidRegistry.BIODIESEL.get().getSource(), new FluidThrusterProperties(0.9f, 1f));
             fluidsProperties.put(FluidRegistry.DIESEL.get().getSource(), new FluidThrusterProperties(1.0f, 0.9f));
             fluidsProperties.put(FluidRegistry.GASOLINE.get().getSource(), new FluidThrusterProperties(1.05f, 0.95f));
             fluidsProperties.put(FluidRegistry.ETHANOL.get().getSource(), new FluidThrusterProperties(0.85f, 1.2f));
-        } else {
+            fluidsProperties.put(FluidRegistry.ETHANOL.get().getSource(), new FluidThrusterProperties(0.85f, 1.2f));
             fluidsProperties.put(net.minecraft.world.level.material.Fluids.LAVA, new FluidThrusterProperties(1,1));
-        }
+            Fluid kerosene = Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation("tfmg", "kerosene")));
+            //Fluid rp1 = Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(new ResourceLocation("tfmg", "rp1")));
+
+            fluidsProperties.put(kerosene, new FluidThrusterProperties(1.2f, 0.8f));
+            //fluidsProperties.put(rp1, new FluidThrusterProperties(1.3f, 0.75f));
+
     }
 
     private static class FluidThrusterProperties {
